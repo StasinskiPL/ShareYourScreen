@@ -1,4 +1,6 @@
-@import "~bootsrap/scss/bootstrap";
+@import "~bootstrap/scss/bootstrap";
+@import "base";
+@import "home";
 
 // justify content
 .jc-start{justify-content: flex-start;}
