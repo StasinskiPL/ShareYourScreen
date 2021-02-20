@@ -2,20 +2,20 @@ import React, { useMemo, useState } from "react";
 import { UiContextProvider } from "./UiContextManager";
 
 const UiContext: React.FC = ({ children }) => {
-  const [openCreateRoomModal, setOpenCreateRoomModal] = useState(false);
-  const [openJoinToRoomModal, setOpenJoinToRoomModal] = useState(false);
+  const [isOpenCreateRoomModal, setOpenCreateRoomModal] = useState(false);
+  const [isOpenJoinToRoomModal, setOpenJoinToRoomModal] = useState(false);
 
   const contextValue = useMemo(
     () => ({
-      openCreateRoomModal,
+      isOpenCreateRoomModal,
       setOpenCreateRoomModal,
-      openJoinToRoomModal,
+      isOpenJoinToRoomModal,
       setOpenJoinToRoomModal,
     }),
     [
-      openCreateRoomModal,
+      isOpenCreateRoomModal,
       setOpenCreateRoomModal,
-      openJoinToRoomModal,
+      isOpenJoinToRoomModal,
       setOpenJoinToRoomModal,
     ]
   );

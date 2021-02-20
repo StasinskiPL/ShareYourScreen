@@ -1,15 +1,17 @@
-import { memo, lazy, Suspense } from "react";
-import { Route, Switch } from "react-router-dom";
-import Home from "./components/Home/Home";
+import { memo } from "react";
+
+import Modals from "./components/Modals";
+import RouteWrapper from "./components/Router/RouteWrapper";
+import { createRoomId } from "./helpers/createRoomId";
 
 function App() {
+  const id = createRoomId();
+  console.log(id);
+
   return (
     <main className="bg-dark">
-      <Suspense fallback={<p>loading...</p>}>
-        <Switch>
-          <Route path="/" component={Home} />
-        </Switch>
-      </Suspense>
+      <Modals />
+      <RouteWrapper />
     </main>
   );
 }

@@ -1,7 +1,8 @@
 import React from "react";
+import UiContext from "./UIContext/UiContext";
 
-const index: React.FC = ({ children }) => {
-  return <div></div>;
+const ContextWrapper: React.FC = ({ children }) => {
+  return <UiContext>{children}</UiContext>;
 };
 
-export default index;
+export default ContextWrapper;
