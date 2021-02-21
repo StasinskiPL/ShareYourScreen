@@ -5,12 +5,12 @@ import Display from "./Display/Display";
 
 const Room: React.FC = () => {
   return (
-    <Container>
+    <Container fluid className="pt-5">
       <Row>
-        <Col lg={8}>
+        <Col xl={9}>
           <Display />
         </Col>
-        <Col lg={4}>
+        <Col xl={3}>
           <Aside />
         </Col>
       </Row>
