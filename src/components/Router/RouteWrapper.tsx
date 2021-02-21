@@ -7,7 +7,7 @@ const RouteWrapper: React.FC = () => {
   return (
     <Suspense fallback={<Loading />}>
       <Switch>
-        <Route path="/" component={Home} />
+        <Route path="/" exact component={Home} />
       </Switch>
     </Suspense>
   );
