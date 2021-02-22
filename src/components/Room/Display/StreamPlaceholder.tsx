@@ -14,7 +14,6 @@ const StreamPlaceholder: React.FC = () => {
     try {
       // @ts-ignore
       const captureStream = await navigator.mediaDevices.getDisplayMedia(opt);
-      console.log(captureStream);
       setStreamSource(captureStream);
       setIsActiveStream(true);
     } catch (err) {

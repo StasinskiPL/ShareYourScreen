@@ -7,8 +7,7 @@ type RoomContextTypes = {
     setIsActiveStream: (u: React.SetStateAction<boolean>) => void;
     streamSource : any;
     setStreamSource: (u: React.SetStateAction<any>) => void;
-
-
+    socket : SocketIOClient.Socket | null;
 };
 
 const initialState: RoomContextTypes = {
@@ -18,10 +17,11 @@ const initialState: RoomContextTypes = {
     setIsActiveStream: () => void 0,
     streamSource:null,
     setStreamSource: () => void 0,
+    socket : null,
 };
 
 export const RoomContextProvider = createContext<RoomContextTypes>(
   initialState
 );
 
-export const useRoomContext = () => useContext(RoomContextProvider);
+export const useRoomContext = () => useContext(RoomContextProvider)

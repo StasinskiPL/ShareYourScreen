@@ -1,11 +1,14 @@
 import React from "react";
 import RoomContext from "./RoomContext/RoomContext";
 import UiContext from "./UIContext/UiContext";
+import UserContext from "./UserContext/UserContext";
 
 const ContextWrapper: React.FC = ({ children }) => {
   return (
     <UiContext>
-      <RoomContext>{children}</RoomContext>
+      <UserContext>
+        <RoomContext>{children}</RoomContext>
+      </UserContext>
     </UiContext>
   );
 };

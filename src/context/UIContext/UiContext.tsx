@@ -4,6 +4,7 @@ import { UiContextProvider } from "./UiContextManager";
 const UiContext: React.FC = ({ children }) => {
   const [isOpenCreateRoomModal, setOpenCreateRoomModal] = useState(false);
   const [isOpenJoinToRoomModal, setOpenJoinToRoomModal] = useState(false);
+  const [isOpenSetNickModal, setOpenSetNickModal] = useState(false);
 
   const contextValue = useMemo(
     () => ({
@@ -11,12 +12,16 @@ const UiContext: React.FC = ({ children }) => {
       setOpenCreateRoomModal,
       isOpenJoinToRoomModal,
       setOpenJoinToRoomModal,
+      isOpenSetNickModal,
+      setOpenSetNickModal,
     }),
     [
       isOpenCreateRoomModal,
       setOpenCreateRoomModal,
       isOpenJoinToRoomModal,
       setOpenJoinToRoomModal,
+      isOpenSetNickModal,
+      setOpenSetNickModal,
     ]
   );
 

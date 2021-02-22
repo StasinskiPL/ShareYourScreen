@@ -21,9 +21,8 @@ const Stream: React.FC = () => {
   return (
     <ReactPlayer
       ref={videoRef}
-      muted={true}
+      // muted={true}
       playing={true}
-      // url="https://www.youtube.com/watch?v=qVIPvJQhF4k"
       url={streamSource || "https://www.youtube.com/watch?v=qVIPvJQhF4k"}
       width="100%"
       height={height}
