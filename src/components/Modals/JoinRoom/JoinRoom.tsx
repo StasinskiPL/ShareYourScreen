@@ -3,12 +3,17 @@ import { Alert, Button, Form, Modal } from "react-bootstrap";
 import { useUiContext } from "../../../context/UIContext/UiContextManager";
 import { isCorrectRoomId } from "../../../helpers/isCorrectRoomId";
 import { useHistory } from "react-router-dom";
+import { useRoomContext } from "../../../context/RoomContext/RoomContextManager";
+import { useUserContext } from "../../../context/UserContext/UserContextManager";
 
 const JoinRoom = () => {
   const { isOpenJoinToRoomModal, setOpenJoinToRoomModal } = useUiContext();
+  const { socket } = useRoomContext();
+  const { userId, userNick } = useUserContext();
+
   const [roomIdInput, setRoomIdInput] = useState("");
-  const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isError, setIsError] = useState(false);
   const history = useHistory();
 
   const handleClose = () => setOpenJoinToRoomModal(false);
@@ -22,6 +27,11 @@ const JoinRoom = () => {
     } else {
       // check if room exist
       setOpenJoinToRoomModal(false);
+      socket?.emit("createroom", {
+        roomid: roomIdInput,
+        user: { userId, userNick },
+      });
+
       history.push(`/room/${roomIdInput}`);
     }
     setRoomIdInput("");

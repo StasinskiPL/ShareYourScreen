@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+
 import getUserId from "../../helpers/getUserId";
 import { getUserNick } from "../../helpers/userNick";
 import { useUiContext } from "../UIContext/UiContextManager";

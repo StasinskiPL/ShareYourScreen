@@ -1,6 +1,5 @@
 import {createRoomId} from"./createRoomId"
 
-
 test("return id",()=>{
     const id = createRoomId()
     // "ddd-ddd-ddd"

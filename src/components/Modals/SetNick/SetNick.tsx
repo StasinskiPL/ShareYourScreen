@@ -15,6 +15,7 @@ const SetNick: React.FC = () => {
   const createNickHandler = (e: React.FormEvent) => {
     e.preventDefault();
     setIsError(false);
+
     if (userInput && userInput.trim() !== "" && userInput.length > 3) {
       setUserNick(userInput);
       setUserNickLocally(userInput);
