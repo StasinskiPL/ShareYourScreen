@@ -23,8 +23,6 @@ const Stream: React.FC = () => {
         const dataUrl = reader.result;
         if (typeof dataUrl === "string") {
           const base64EncodedData = dataUrl.split(",")[1];
-          console.log(room);
-          console.log(socket);
           socket?.emit("stream", { room, streamChunk: base64EncodedData });
         }
       };
@@ -64,7 +62,17 @@ const Stream: React.FC = () => {
   }, [streamSource, socket, room, sendBlobAsBase64]);
 
   useEffect(() => {
-    socket?.on("liveVideo", ({}) => {});
+    console.log("init socket");
+    console.log(socket);
+    socket?.on("liveVideo", (res: any) => {
+      console.log(res.videoBase64);
+      setVideoSrc(res.videoBase64);
+    });
+    return () => {
+      if (socket) {
+        socket.removeListener("liveVideo");
+      }
+    };
   }, [socket, room]);
 
   console.count("render");
@@ -73,18 +81,11 @@ const Stream: React.FC = () => {
     <ReactPlayer
       ref={videoRef}
       playing={true}
-      pip={true}
+      // pip={true}
       controls={true}
-      // muted={true}
       url={videoSrc || "https://www.youtube.com/watch?v=2zToEPpFEN8"}
-      // url={streamSource}
       width="100%"
       height={height}
-      config={{
-        file: {
-          forceVideo: true,
-        },
-      }}
     />
   );
 };
