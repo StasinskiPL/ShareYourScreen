@@ -27,15 +27,7 @@ const RoomContext: React.FC = ({ children }) => {
       setStreamSource,
       socket,
     }),
-    [
-      roomHostId,
-      setRoomHostId,
-      isActiveStream,
-      setIsActiveStream,
-      streamSource,
-      setStreamSource,
-      socket,
-    ]
+    [roomHostId, isActiveStream, streamSource, socket]
   );
 
   return (

@@ -15,14 +15,7 @@ const UiContext: React.FC = ({ children }) => {
       isOpenSetNickModal,
       setOpenSetNickModal,
     }),
-    [
-      isOpenCreateRoomModal,
-      setOpenCreateRoomModal,
-      isOpenJoinToRoomModal,
-      setOpenJoinToRoomModal,
-      isOpenSetNickModal,
-      setOpenSetNickModal,
-    ]
+    [isOpenCreateRoomModal, isOpenJoinToRoomModal, isOpenSetNickModal]
   );
 
   return (

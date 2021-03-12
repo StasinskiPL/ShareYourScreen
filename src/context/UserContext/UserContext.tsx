@@ -30,7 +30,7 @@ const UserContext: React.FC = ({ children }) => {
       userNick,
       setUserNick,
     }),
-    [userId, userNick, setUserNick]
+    [userId, userNick]
   );
 
   return (

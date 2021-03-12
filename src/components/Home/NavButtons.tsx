@@ -8,6 +8,7 @@ const NavButtons: React.FC = () => {
     <Row className="mt-5">
       <Col className="d-flex jc-center">
         <Button
+          data-testid="joinroom"
           onClick={() => setOpenJoinToRoomModal(true)}
           variant="outline-light"
           className="mx-2"

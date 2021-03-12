@@ -8,7 +8,6 @@ const Display: React.FC = () => {
   return (
     <div className="video-wrapper">
       {isActiveStream ? <Stream /> : <StreamPlaceholder />}
-
       <Controllers />
     </div>
   );
