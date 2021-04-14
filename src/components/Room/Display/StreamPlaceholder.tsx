@@ -4,7 +4,6 @@ import { useRoomContext } from "../../../context/RoomContext/RoomContextManager"
 
 const opt = {
   video: true,
-  audio: false,
 };
 
 const StreamPlaceholder: React.FC = () => {
@@ -12,8 +11,7 @@ const StreamPlaceholder: React.FC = () => {
 
   const startStreamHandler = async () => {
     try {
-      // @ts-ignore
-      const captureStream = await navigator.mediaDevices.getDisplayMedia(opt);
+      const captureStream = await navigator.mediaDevices.getUserMedia(opt);
       setStreamSource(captureStream);
       setIsActiveStream(true);
     } catch (err) {

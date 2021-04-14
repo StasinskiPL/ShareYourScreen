@@ -1,92 +1,42 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import ReactPlayer from "react-player";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useRoomContext } from "../../../context/RoomContext/RoomContextManager";
 
 const Stream: React.FC = () => {
-  const [height, setHeight] = useState(0);
-  const [videoSrc, setVideoSrc] = useState<string | null>(null);
-
-  const { id: room }: { id: string } = useParams();
+  const { id: room } = useParams<{ id: string }>();
 
   const { streamSource, socket } = useRoomContext();
 
-  const mediaChunks = useRef<Blob[]>([]);
-  const videoRef = useRef<any>(null!);
-  const recorder = useRef(new MediaRecorder(streamSource));
+  const videoRef = useRef<HTMLVideoElement>(null!);
 
-  const sendBlobAsBase64 = useCallback(() => {
-    return function sendBlobAsBase64(blob: Blob) {
-      const reader = new FileReader();
-
-      const eventHandler = () => {
-        const dataUrl = reader.result;
-        if (typeof dataUrl === "string") {
-          const base64EncodedData = dataUrl.split(",")[1];
-          socket?.emit("stream", { room, streamChunk: base64EncodedData });
-        }
-      };
-
-      reader.addEventListener("load", eventHandler);
-      reader.readAsDataURL(blob);
-    };
-  }, [room, socket]);
+  // const recorder = useRef(new MediaRecorder(streamSource));
 
   useEffect(() => {
-    const handleResize = () => {
-      const calcHeight = videoRef.current.wrapper?.clientWidth;
-      setHeight((calcHeight * 9) / 16);
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  useEffect(() => {
-    if (recorder.current.state !== "recording") {
-      recorder.current.start();
+    if (videoRef && videoRef.current) {
+      videoRef.current.srcObject = streamSource;
     }
-
-    setInterval(() => {
-      if (recorder?.current?.state !== "inactive") {
-        recorder.current.requestData();
-      }
-    }, 10000);
-
-    recorder.current.ondataavailable = (e) => {
-      if (e.data && e.data.size > 0) {
-        sendBlobAsBase64()(e.data);
-      }
-    };
-  }, [streamSource, socket, room, sendBlobAsBase64]);
+  }, [streamSource]);
 
   useEffect(() => {
-    console.log("init socket");
-    console.log(socket);
-    socket?.on("liveVideo", (res: any) => {
-      console.log(res.videoBase64);
-      setVideoSrc(res.videoBase64);
-    });
-    return () => {
-      if (socket) {
-        socket.removeListener("liveVideo");
-      }
-    };
-  }, [socket, room]);
-
-  console.count("render");
+    // if (recorder.current.state !== "recording") {
+    //   recorder.current.start();
+    // }
+    // setInterval(() => {
+    //   if (recorder?.current?.state !== "inactive") {
+    //     recorder.current.requestData();
+    //   }
+    // }, 10000);
+    // recorder.current.ondataavailable = (e) => {
+    //   if (e.data && e.data.size > 0) {
+    //     setVideoSrc(e.data);
+    //   }
+    // };
+  }, [streamSource, socket, room]);
 
   return (
-    <ReactPlayer
-      ref={videoRef}
-      playing={true}
-      // pip={true}
-      controls={true}
-      url={videoSrc || "https://www.youtube.com/watch?v=2zToEPpFEN8"}
-      width="100%"
-      height={height}
-    />
+    <>
+      <video width="100%" autoPlay ref={videoRef} />
+    </>
   );
 };
 
